@@ -1,6 +1,9 @@
+import 'package:daom/controllers/bindings/auth_binding.dart';
 import 'package:daom/services/volunteer_nanumportal_info.dart';
 import 'package:daom/themes/text_theme.dart';
+import 'package:daom/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -17,6 +20,11 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text("Home Page"),
+            SizedBox(height: _height * 0.08),
+            GestureDetector(
+              onTap: () => Get.to(LoginPage(), binding: AuthBinding()),
+              child: Text("로그인 화면으로 가기"),
+            ),
             SizedBox(height: _height * 0.1),
             Text("1365 나눔포털에서 불러온 봉사활동 리스트", style: titleText),
             FutureBuilder(

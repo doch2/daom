@@ -1,3 +1,6 @@
+android/app/google-services.json
+lib/token_reference.dart
+
 # Miscellaneous
 *.class
 *.log

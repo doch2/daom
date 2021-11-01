@@ -1,5 +1,6 @@
 import 'package:daom/controllers/volunteer_controller.dart';
 import 'package:daom/screens/home.dart';
+import 'package:daom/screens/main_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         initialBinding: VolunteerBinding(),
-        home: Home());
+        home: MainScreen());
   }
 
   void hideKeyboard(BuildContext context) {
