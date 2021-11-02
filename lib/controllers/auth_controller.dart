@@ -35,7 +35,7 @@ class AuthController extends GetxController {
     );
 
     if (isEmailSignUp) {
-      if (await Database().createNewUser(_user)) {
+      if (await FirestoreDatabase().createNewUser(_user)) {
         Get.find<UserController>().user = _user;
       }
     } else {
@@ -47,7 +47,7 @@ class AuthController extends GetxController {
         if (doc.exists) {
           print("exists");
         } else {
-          if (await Database().createNewUser(_user)) {
+          if (await FirestoreDatabase().createNewUser(_user)) {
             Get.find<UserController>().user = _user;
           }
         }

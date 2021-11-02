@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daom/models/user.dart';
 
-class Database {
+class FirestoreDatabase {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<bool> createNewUser(UserModel user) async {
@@ -25,6 +25,20 @@ class Database {
     } catch (e) {
       print(e);
       rethrow;
+    }
+  }
+
+  Future<bool> writeNewPost(String title, String content, int photoAmount, String postID) async {
+    try {
+      await _firestore.collection("posts").doc(postID).set({
+        "title": title,
+        "content": content,
+        "photoAmount": photoAmount
+      });
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }
