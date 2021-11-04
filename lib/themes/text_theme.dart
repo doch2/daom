@@ -7,3 +7,6 @@ final writePostTitle = TextStyle(
     fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w700);
 final writePostContent = TextStyle(
     fontSize: 15, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);
+
+final chatWriteMessage = TextStyle(
+    fontSize: 12, fontFamily: 'NotoSansKR', fontWeight: FontWeight.w500);

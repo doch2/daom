@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daom/controllers/user_controller.dart';
 import 'package:daom/models/user.dart';
 import 'package:daom/services/firestore_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
+  FirebaseAuth authInstance = FirebaseAuth.instance;
 
   void signInWithGoogle() async {
     // Trigger the authentication flow
@@ -23,15 +26,39 @@ class AuthController extends GetxController {
     );
     UserCredential _authResult = await FirebaseAuth.instance.signInWithCredential(credential);
 
-    writeAccountInfo(_authResult.user?.uid, googleUser?.email, googleUser?.displayName, false);
-
+    writeAccountInfo(_authResult.user?.uid, googleUser?.email, googleUser?.displayName, googleUser?.photoUrl, false);
   }
 
-  void writeAccountInfo(String? userID, String? email, String? name, bool isEmailSignUp) async {
+  void logOut() async {
+    try {
+      await authInstance.signOut();
+
+      Get.find<UserController>().clear();
+
+      Fluttertoast.showToast(
+          msg: "로그아웃 되었습니다.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color(0xE6FFFFFF),
+          textColor: Colors.black,
+          fontSize: 13.0
+      );
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar(
+        "로그아웃 오류",
+        e.message ?? "예기치 못한 오류가 발생하였습니다.",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  void writeAccountInfo(String? userID, String? email, String? name, String? profileImgUrl, bool isEmailSignUp) async {
     UserModel _user = UserModel(
-        id: userID,
-        email: email,
-        name: name,
+      id: userID,
+      email: email,
+      name: name,
+      profileImg: profileImgUrl,
     );
 
     if (isEmailSignUp) {

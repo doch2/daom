@@ -20,7 +20,7 @@ class LoginPage extends GetWidget<AuthController> {
             Text("Login Page"),
             SizedBox(height: _height * 0.075),
             GestureDetector(
-              onTap: () => {controller.signInWithGoogle()},
+              onTap: () => controller.signInWithGoogle(),
               child: Container(
                 margin: EdgeInsets.only(left: 8, bottom: 16),
                 padding: EdgeInsets.all(6),
@@ -35,6 +35,10 @@ class LoginPage extends GetWidget<AuthController> {
                   fit: BoxFit.contain,
                 ),
               ),
+            ),
+            GestureDetector(
+              onTap: () => controller.logOut(),
+              child: Icon(Icons.logout),
             ),
             SizedBox(height: _height * 0.15),
           ],
